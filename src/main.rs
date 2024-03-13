@@ -96,51 +96,79 @@ impl Server {
 
 //Three servers code works flawlessly. Now we test for n servers model.
 
+// fn main() {
+//     // Define the number of servers
+//     let num_servers = 9;
+//
+//     // Create a vector to store servers
+//     let mut servers: Vec<Server> = Vec::with_capacity(num_servers);
+//
+//     // Loop to create servers and their connections
+//     /*for server_id in 1..=num_servers {
+//         //Attempt1
+//         // Generate connected server IDs (excluding the current server)
+//         /*let connected_servers: Vec<u32> = (1..=num_servers)
+//             .filter(|id| *id != server_id)
+//             .take(2) // Connect to a maximum of 2 other servers
+//             .collect();
+//             //.map(|id| *id as u32) // Convert each id to u32 within the iterator
+//
+//         // Create a new server with its connected servers
+//         let server = Server::new(server_id as u32, connected_servers);
+//         servers.push(server.run());  // Run the server and add it to the vector */
+//
+//         //Attempt2
+//         /*let mut connected_servers: Vec<u32> = Vec::with_capacity(2);
+//         for id in (1..=num_servers).filter(|id| id != server_id).take(2) {
+//             connected_servers.push(id as u32); // Convert and push into the vector
+//         }
+//
+//         let server = Server::new(server_id as u32, connected_servers);
+//         servers.push(server.run());*/
+//
+//
+//     }*/
+//
+//     for server_id in 1..=num_servers {
+//         let connected_servers: Vec<u32> = (1..=num_servers)
+//             .filter(|id| id.eq(&server_id)) // Check for equality with reference
+//             .take(2)
+//             .collect();
+//
+//         let server = Server::new(server_id as u32, connected_servers);
+//         servers.push(server.run());
+//     }
+//
+//
+//     // Now you have a vector 'servers' containing all 9 servers
+//     // with their connections defined
+// }
+
 fn main() {
-    // Define the number of servers
-    let num_servers = 9;
+    let num_servers = 8; // Adjust as needed
 
     // Create a vector to store servers
     let mut servers: Vec<Server> = Vec::with_capacity(num_servers);
 
-    // Loop to create servers and their connections
-    /*for server_id in 1..=num_servers {
-        //Attempt1
-        // Generate connected server IDs (excluding the current server)
-        /*let connected_servers: Vec<u32> = (1..=num_servers)
-            .filter(|id| *id != server_id)
-            .take(2) // Connect to a maximum of 2 other servers
-            .collect();
-            //.map(|id| *id as u32) // Convert each id to u32 within the iterator
+    // Create all servers
+    for i in 0..num_servers {
+        let mut rng = rand::thread_rng();
+        let mut peers: Vec<u32> = Vec::new();
 
-        // Create a new server with its connected servers
-        let server = Server::new(server_id as u32, connected_servers);
-        servers.push(server.run());  // Run the server and add it to the vector */
-
-        //Attempt2
-        /*let mut connected_servers: Vec<u32> = Vec::with_capacity(2);
-        for id in (1..=num_servers).filter(|id| id != server_id).take(2) {
-            connected_servers.push(id as u32); // Convert and push into the vector
+        // Randomly select a subset of servers as peers (excluding itself)
+        for _ in 0..2 { // Select 2 random peers (adjust as needed)
+            let random_peer = rng.gen_range(0..num_servers);
+            if random_peer != i {
+                peers.push(random_peer as u32);
+            }
         }
 
-        let server = Server::new(server_id as u32, connected_servers);
-        servers.push(server.run());*/
-
-
-    }*/
-
-    for server_id in 1..=num_servers {
-        let connected_servers: Vec<u32> = (1..=num_servers)
-            .filter(|id| id.eq(&server_id)) // Check for equality with reference
-            .take(2)
-            .collect();
-
-        let server = Server::new(server_id as u32, connected_servers);
-        servers.push(server.run());
+        servers.push(Server::new(i as u32, peers));
     }
 
-
-    // Now you have a vector 'servers' containing all 9 servers
-    // with their connections defined
+    // Run all servers concurrently (replace with actual implementation)
+    for server in servers.iter_mut() {
+        server.run();
+    }
 }
 
