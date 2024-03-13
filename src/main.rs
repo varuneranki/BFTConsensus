@@ -1,6 +1,6 @@
 use rand::Rng;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 enum Message {
     Attack,
     Retreat,
@@ -29,9 +29,12 @@ impl Server {
     }
 
     fn perform_consensus(&mut self) -> Option<Message> {
-        let mut counts = [0; 2]; // Attack and Retreat counts
+        let mut counts = [0; 2];
         for message in self.received_messages.iter() {
-            counts[message as usize] += 1;
+            match message {
+                Message::Attack => counts[0] += 1,
+                Message::Retreat => counts[1] += 1,
+            }
         }
 
         if counts[0] > counts[1] {
@@ -58,8 +61,12 @@ impl Server {
                 // Replace this with your communication library
                 vec![Message::Attack]; // Example message
 
-            for message in messages_from_peers.iter() {
+            /*for message in messages_from_peers.iter() {
                 self.handle_message(*message);
+            }*/
+
+            for message in messages_from_peers.iter() {
+                self.handle_message(message.clone());
             }
 
             let consensus = self.perform_consensus();
@@ -81,12 +88,15 @@ impl Server {
 }
 
 fn main() {
-    let server1 = Server::new(1, vec![2, 3]);
+   /* let server1 = Server::new(1, vec![2, 3]);
     let server2 = Server::new(2, vec![1, 3]);
     let server3 = Server::new(3, vec![1, 2]);
 
     server1.run();
     server2.run();
-    server3.run();
+    server3.run();*/
+    let server1 = Server::new(1, vec![2, 3]).run();
+    let server2 = Server::new(2, vec![1, 3]).run();
+    let server3 = Server::new(3, vec![1, 2]).run();
 }
 
