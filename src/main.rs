@@ -99,3 +99,5 @@ fn main() {
     // Keep the main thread alive
     thread::sleep(Duration::from_secs(10));
 }
+
+//Compile fails with 4 errors. Sample code failure. 
