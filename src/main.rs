@@ -145,7 +145,7 @@ impl Server {
 // }
 
 fn main() {
-    let num_servers = 22; // Adjust as needed
+    let num_servers = 4; // Adjust as needed
 
     // Create a vector to store servers
     let mut servers: Vec<Server> = Vec::with_capacity(num_servers);
