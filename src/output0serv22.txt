@@ -1,0 +1,161 @@
+output for 22 servers:
+
+Sending Attack to server 18
+Sending Attack to server 10
+Server 0 reached consensus: Attack
+Sending Attack to server 16
+Sending Attack to server 4
+Server 1 reached consensus: Attack
+Sending Attack to server 5
+Sending Attack to server 13
+Server 2 reached consensus: Attack
+Sending Attack to server 8
+Server 3 reached consensus: Attack
+Sending Retreat to server 6
+Sending Retreat to server 12
+Server 4 reached consensus: Attack
+Sending Retreat to server 1
+Sending Retreat to server 18
+Server 5 reached consensus: Attack
+Sending Retreat to server 21
+Server 6 reached consensus: Attack
+Sending Attack to server 17
+Server 7 reached consensus: Attack
+Sending Retreat to server 3
+Sending Retreat to server 6
+Server 8 reached consensus: Attack
+Sending Attack to server 13
+Server 9 reached consensus: Attack
+Sending Attack to server 1
+Sending Attack to server 16
+Server 10 reached consensus: Attack
+Sending Retreat to server 16
+Sending Retreat to server 4
+Server 11 reached consensus: Attack
+Sending Attack to server 14
+Sending Attack to server 5
+Server 12 reached consensus: Attack
+Sending Retreat to server 4
+Sending Retreat to server 4
+Server 13 reached consensus: Attack
+Sending Retreat to server 11
+Server 14 reached consensus: Attack
+Sending Retreat to server 2
+Sending Retreat to server 7
+Server 15 reached consensus: Attack
+Sending Attack to server 17
+Sending Attack to server 3
+Server 16 reached consensus: Attack
+Sending Attack to server 6
+Sending Attack to server 3
+Server 17 reached consensus: Attack
+Sending Attack to server 1
+Sending Attack to server 15
+Server 18 reached consensus: Attack
+Sending Retreat to server 21
+Server 19 reached consensus: Attack
+Sending Retreat to server 10
+Sending Retreat to server 14
+Server 20 reached consensus: Attack
+Sending Retreat to server 13
+Sending Retreat to server 8
+Server 21 reached consensus: Attack
+
+
+Unfortunately, due to the limitations of the simulation and the output format, it's not possible to definitively determine which specific server sent a message to another server. The output only shows which server is sending a message and to which server ID.
+
+However, we can still analyze the output and arrange it by server name in ascending order, indicating the messages received (Attack or Retreat) from other servers:
+
+Server 0:
+
+Received messages (before reaching consensus): Unknown (implicit Attack messages based on reaching Attack consensus)
+Server 1:
+
+Received messages (before reaching consensus): Attack (from Server 0)
+Received messages (after reaching consensus - Attack): Retreat (from Server 5), Retreat (from Server 18)
+Server 2:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Server 3:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 7), Retreat (from Server 6), Attack (from Server 17), Attack (from Server 15)
+Server 4:
+
+Received messages (before reaching consensus): Attack (from unknown server), Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 6), Retreat (from Server 12), Retreat (from Server 11), Retreat (from Server 10), Retreat (from Server 4) (sent by itself)
+Server 5:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 6)
+Server 6:
+
+Received messages (before reaching consensus): Retreat (from unknown server), Retreat (from unknown server)
+Received messages (after reaching consensus - Attack): Attack (from Server 17), Attack (from Server 3)
+Server 7:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 3), Retreat (from Server 15)
+Server 8:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 6), Retreat (from Server 21)
+Server 9:
+
+Received messages (before reaching consensus): Unknown (implicit Attack messages based on reaching Attack consensus)
+Server 10:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 16), Retreat (from Server 20), Retreat (from Server 11)
+Server 11:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 4), Retreat (from Server 15)
+Server 12:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 4)
+Server 13:
+
+Received messages (before reaching consensus): Attack (from unknown server), Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 11), Retreat (from Server 20)
+Server 14:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 20), Retreat (from Server 11)
+Server 15:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Attack (from Server 17), Attack (from Server 11)
+Server 16:
+
+Received messages (before reaching consensus): Attack (from unknown server), Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 4), Retreat (from Server 10)
+Server 17:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Attack (from Server 15)
+Server 18:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 1), Retreat (from Server 5)
+Server 19:
+
+Received messages (before reaching consensus): Unknown (implicit Attack messages based on reaching Attack consensus)
+Server 20:
+
+Received messages (before reaching consensus): Attack (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 14), Retreat (from Server 13)
+Server 21:
+
+Received messages (before reaching consensus): Retreat (from unknown server)
+Received messages (after reaching consensus - Attack): Retreat (from Server 19), Retreat (from Server 8)
+Key Points:
+
+Due to the random nature of initial messages and peer communication, the order in which servers receive messages can vary in different simulation runs.
+This analysis provides a general idea of the message flow based on the given output.
+The "unknown server" notation indicates that the specific sender cannot be determined from the provided output format.
+Additional Considerations:
+
+If you need to track the exact message flow with senders and receivers, modifications to the code to record this information during message transmission would be necessary.
+The current implementation assumes reliable message delivery, which might not be realistic in real-world scenarios. You could explore introducing message loss or delays to simulate a more complex communication environment.
