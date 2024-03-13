@@ -87,16 +87,36 @@ impl Server {
     }
 }
 
-fn main() {
-   /* let server1 = Server::new(1, vec![2, 3]);
-    let server2 = Server::new(2, vec![1, 3]);
-    let server3 = Server::new(3, vec![1, 2]);
+/*fn main() {
 
-    server1.run();
-    server2.run();
-    server3.run();*/
     let server1 = Server::new(1, vec![2, 3]).run();
     let server2 = Server::new(2, vec![1, 3]).run();
     let server3 = Server::new(3, vec![1, 2]).run();
+}*/
+
+//Three servers code works flawlessly. Now we test for n servers model.
+
+fn main() {
+    // Define the number of servers
+    let num_servers = 9;
+
+    // Create a vector to store servers
+    let mut servers: Vec<Server> = Vec::with_capacity(num_servers);
+
+    // Loop to create servers and their connections
+    for server_id in 1..=num_servers {
+        // Generate connected server IDs (excluding the current server)
+        let connected_servers: Vec<u32> = (1..=num_servers)
+            .filter(|id| *id as u32 != server_id)
+            .take(2) // Connect to a maximum of 2 other servers
+            .collect();
+
+        // Create a new server with its connected servers
+        let server = Server::new(server_id as u32, connected_servers);
+        servers.push(server.run());  // Run the server and add it to the vector
+    }
+
+    // Now you have a vector 'servers' containing all 9 servers
+    // with their connections defined
 }
 
