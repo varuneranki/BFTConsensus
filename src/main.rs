@@ -95,8 +95,8 @@ impl Server {
 }
 
 fn main() {
-    let num_servers = 7; // Adjust as needed
-    let num_byzantine = 2; // Number of Byzantine servers (t)
+    let num_servers = 20; // Adjust as needed
+    let num_byzantine = 5; // Number of Byzantine servers (t)
 
     // Create a vector to store servers
     let mut servers: Vec<Server> = Vec::with_capacity(num_servers);
